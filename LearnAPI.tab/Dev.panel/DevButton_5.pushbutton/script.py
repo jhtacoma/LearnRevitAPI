@@ -73,7 +73,10 @@ def get_stored_value (p):
     Returns a value from a parameter based on its StorageType.
     """
     if p.StorageType == StorageType.String:
-        return p.AsString()
+        if p.HasValue():
+            return p.AsString()
+        else:
+            return ""
     elif p.StorageType == StorageType.Double:
         return p.AsDouble()
     elif p.StorageType == StorageType.Integer:
@@ -83,7 +86,7 @@ def get_stored_value (p):
     else:
         return 'not string, double, integer, or elementID!'
 
-for p in picked_object.Parameters: # type: Parameter
+def read_param(p, return_its_value=False):
     try:
         print ("Name: {}".format(p.Definition.Name))
         print ("ParameterGroup: {}".format(p.Definition.ParameterGroup))
@@ -99,3 +102,51 @@ for p in picked_object.Parameters: # type: Parameter
             print ("found the comments!!!!!!!!!!!!!!!")
     except:
         print ('nope!')
+    if return_its_value:
+        try:
+            return get_stored_value(p)
+        except:
+            return "NO VALUE!"
+
+# FOR BUILT-IN PARAMETERS
+comments    = picked_object.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+mark        = picked_object.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
+el_type     = picked_object.get_Parameter(BuiltInParameter.ELEM_TYPE_PARAM)
+area        = picked_object.get_Parameter(BuiltInParameter.HOST_AREA_COMPUTED)
+offset      = picked_object.get_Parameter(BuiltInParameter.WALL_BASE_OFFSET)
+
+
+# print (read_param(comments))
+# print (read_param(mark))
+# print (read_param(el_type))
+# print (read_param(area))
+# print (read_param(offset))
+
+# print ("Type mark: {}".format(picked_object.get_Parameter(BuiltInParameter.ALL_MODEL_TYPE_MARK)))
+
+read_param(comments)
+read_param(mark)
+read_param(el_type)
+read_param(area)
+read_param(offset)
+#
+print ("comments val is {}".format(read_param(comments, True)))
+
+with Transaction (doc, 'mychanger') as t: # type: Transaction
+
+    t.Start()
+
+    comments.Set(read_param(comments, True) + " NEW!")
+    mark.Set(read_param(mark, True) + " NEW!")
+    el_type.Set(ElementId(333631)) # note that, NATURALLY, you don't just set it to 333631, but to ElementId(333631)!
+    # area.Set (25.55)
+    # area.Set (-1.5)
+    # area.Set(read_param(area, True) + " NEW!")
+
+    t.Commit()
+
+
+read_param(comments)
+read_param(mark)
+# read_param(el_type)
+# read_param(area)

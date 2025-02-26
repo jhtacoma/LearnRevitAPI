@@ -42,8 +42,8 @@ class CustomFilter(ISelectionFilter):
             return True
 
 # custom_filter     = CustomFilter()
-# selected_elements = selection.PickElementsByRectangle(custom_filter, "Select rooms ")
-# print(selected_elements)
+# selected_stuff = selection.PickElementsByRectangle(custom_filter, "Select rooms ")
+# print(selected_stuff)
 
 
 
@@ -58,7 +58,7 @@ class ISelectionFilter_Classes(ISelectionFilter):
             return True
 
 # filter_types    = ISelectionFilter_Classes([Room, RoomTag])
-# selected_elements = selection.PickObjects(ObjectType.Element, filter_types)
+# selected_stuff = selection.PickObjects(ObjectType.Element, filter_types)
 
 
 class ISelectionFilter_Categories(ISelectionFilter):

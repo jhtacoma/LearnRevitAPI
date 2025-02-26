@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__   = "Code reuse template"
+__title__   = "Code reuse"
 __doc__     = """Version = 1.0
 Date    = 15.06.2024
 ________________________________________________________________

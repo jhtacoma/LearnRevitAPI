@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__title__ = "Selection stuff"                           # Name of the button displayed in Revit UI
+__title__ = "Selections"                           # Name of the button displayed in Revit UI
 __doc__ = """Version = 1.0
 
 _____________________________________________________________________
@@ -17,7 +17,7 @@ __min_revit_ver__ = 2019                                        # Limit your Scr
 
 from Autodesk.Revit.DB.Architecture import Room
 
-# from Samples.Selection import selected_elements
+# from Samples.Selection import selected_stuff
 
 __max_revit_ver = 2022                                          # Limit your Scripts to certain Revit versions if it's not compatible due to RevitAPI Changes.
 # __context__     = ['Walls', 'Floors', 'Roofs']                # Make your button available only when certain categories are selected. Or Revit/View Types.
@@ -95,19 +95,19 @@ if __name__ == '__main__':
 
     #1️⃣By el ids:
     # selected_element_ids = selection.GetElementIds()
-    # selected_elements = [doc.GetElement(e_id) for e_id in selected_element_ids if type(doc.GetElement(e_id)) == Room]
-    # print (selected_elements)
+    # selected_stuff = [doc.GetElement(e_id) for e_id in selected_element_ids if type(doc.GetElement(e_id)) == Room]
+    # print (selected_stuff)
 
     # 2️⃣ By rectangle (selects elements directly, not their IDs!)
     # BY RECTANGLE PICKS MULTIPLE THINGS AT ONCE, BUT YOU ONLY GET ONE CHANGE TO INCLUDE IT IN YOUR SELECTION BOX
-    # selected_elements = selection.PickElementsByRectangle("make a rectangle, dude!")
-    # selected_elements = [el for el in selected_elements if type(el) == Wall]
-    # print (selected_elements)
+    # selected_stuff = selection.PickElementsByRectangle("make a rectangle, dude!")
+    # selected_stuff = [el for el in selected_stuff if type(el) == Wall]
+    # print (selected_stuff)
 
 
     # # 3️⃣ Pick object
     # selected_element = selection.PickObject(ObjectType.Element, "pick a wall!")
-    # selected_elements = [el for el in selected_elements if type(el) == Wall]
+    # selected_stuff = [el for el in selected_stuff if type(el) == Wall]
     # print (selected_element)
     # print (doc.GetElement(selected_element))
 
@@ -116,8 +116,8 @@ if __name__ == '__main__':
     # PICKOBJECTS PICKS MULTIPLE THINGS AT ONCE, BUT YOU HAVE TO CLICK 'FINISH' TO PROCEED
     # ALSO, IT RETURNS *references*, NOT ELEMENTS THEMSELVES
     # selected_element_refs = selection.PickObjects(ObjectType.Element, "pick a wall!")
-    # selected_elements = [el for el in [doc.GetElement(el_ref) for el_ref in selected_element_refs] if type(el) == Wall]
-    # for el in selected_elements:
+    # selected_stuff = [el for el in [doc.GetElement(el_ref) for el_ref in selected_element_refs] if type(el) == Wall]
+    # for el in selected_stuff:
     #     print (el)
 
     # 5️⃣ Pick Point
